@@ -1,0 +1,19 @@
+{
+  "name": "feiyingmm-plugins",
+  "owner": {
+    "name": "feiyingmm",
+    "email": "mhg63@qq.com"
+  },
+  "plugins": [
+    {
+      "name": "github-doc-generator",
+      "source": "./plugins/github-doc-generator",
+      "description": "分析 GitHub 上的 Claude Code Skills/Plugins 项目并生成中文使用教程文档",
+      "version": "1.0.0",
+      "author": {
+        "name": "feiyingmm",
+        "email": "mhg63@qq.com"
+      }
+    }
+  ]
+}

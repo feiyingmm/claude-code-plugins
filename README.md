@@ -6,57 +6,66 @@ Claude Code 插件集合，包含实用的 Skills 工具，帮助提升开发效
 
 ## 插件列表
 
-| Skill | 描述 | 触发方式 |
-|-------|------|----------|
-| [github-doc-generator](#github-doc-generator) | 分析 GitHub Skills/Plugins 项目并生成中文使用教程文档 | 手动触发 |
+| Plugin | 描述 | 安装命令 |
+|--------|------|----------|
+| [github-doc-generator](#github-doc-generator) | 分析 GitHub Skills/Plugins 项目并生成中文使用教程文档 | `/plugin install github-doc-generator@feiyingmm-plugins` |
 
 ---
 
 ## 安装方式
 
-### Claude Code 安装
+### 添加 Marketplace
+
+首先需要添加此插件市场：
 
 ```bash
-# 方法一：通过 URL 安装（推荐）
-claude plugin install https://github.com/feiyingmm/claude-code-plugins.git
+# 方法一：在 Claude Code 中使用斜杠命令
+/plugin marketplace add feiyingmm/claude-code-plugins
 
-# 方法二：在 Claude Code 中使用斜杠命令
-/plugin install https://github.com/feiyingmm/claude-code-plugins.git
-
-# 方法三：手动安装
-git clone https://github.com/feiyingmm/claude-code-plugins.git
-claude plugin add ./claude-code-plugins
+# 方法二：使用 CLI
+claude plugin marketplace add feiyingmm/claude-code-plugins
 ```
 
-### OpenCode 安装
+### 安装插件
+
+添加 marketplace 后，安装需要的插件：
 
 ```bash
-# 克隆到 OpenCode plugins 目录
-git clone https://github.com/feiyingmm/claude-code-plugins.git ~/.opencode/plugins/claude-code-plugins
+# 在 Claude Code 中
+/plugin install github-doc-generator@feiyingmm-plugins
+
+# 或使用 CLI
+claude plugin install github-doc-generator@feiyingmm-plugins
+```
+
+### 指定安装范围
+
+```bash
+# 用户范围（默认）- 所有项目可用
+/plugin install github-doc-generator@feiyingmm-plugins
+
+# 项目范围 - 当前仓库的所有协作者可用
+claude plugin install github-doc-generator@feiyingmm-plugins --scope project
+
+# 本地范围 - 仅当前仓库自己可用
+claude plugin install github-doc-generator@feiyingmm-plugins --scope local
 ```
 
 ---
 
 ## 卸载方式
 
-### Claude Code 卸载
-
 ```bash
-claude plugin remove github-doc-generator
+# 卸载插件
+/plugin uninstall github-doc-generator@feiyingmm-plugins
 
-# 或在 Claude Code 中
-/plugin remove github-doc-generator
-```
-
-### OpenCode 卸载
-
-```bash
-rm -rf ~/.opencode/plugins/claude-code-plugins
+# 移除 marketplace
+/plugin marketplace remove feiyingmm-plugins
 ```
 
 ---
 
-## Skills 详情
+## 插件详情
 
 ### github-doc-generator
 
@@ -156,10 +165,14 @@ git config --global https.proxy http://127.0.0.1:7897
 ```
 claude-code-plugins/
 ├── .claude-plugin/
-│   └── plugin.json              # 插件元数据
-├── skills/
-│   └── github-doc-generator/
-│       └── SKILL.md             # Skill 定义文件
+│   └── marketplace.json         # Marketplace 目录文件
+├── plugins/
+│   └── github-doc-generator/    # 插件目录
+│       ├── .claude-plugin/
+│       │   └── plugin.json      # 插件元数据
+│       └── skills/
+│           └── github-doc-generator/
+│               └── SKILL.md     # Skill 定义文件
 ├── LICENSE
 ├── README.md
 └── .gitignore
@@ -169,14 +182,41 @@ claude-code-plugins/
 
 ## 贡献指南
 
-欢迎贡献新的 Skills！
+欢迎贡献新的插件！
 
 1. Fork 本仓库
-2. 在 `skills/` 目录下创建新的 Skill 文件夹
-3. 添加 `SKILL.md` 文件，包含 YAML frontmatter（name, description）
-4. 提交 Pull Request
+2. 在 `plugins/` 目录下创建新的插件文件夹
+3. 添加 `.claude-plugin/plugin.json` 和 `skills/` 目录
+4. 更新 `.claude-plugin/marketplace.json` 添加插件条目
+5. 提交 Pull Request
 
-### Skill 文件模板
+### 插件文件模板
+
+```
+plugins/
+└── your-plugin/
+    ├── .claude-plugin/
+    │   └── plugin.json          # 插件清单
+    └── skills/
+        └── your-skill/
+            └── SKILL.md         # Skill 定义
+```
+
+### plugin.json 模板
+
+```json
+{
+  "name": "your-plugin",
+  "description": "插件描述",
+  "version": "1.0.0",
+  "author": {
+    "name": "Your Name",
+    "email": "your@email.com"
+  }
+}
+```
+
+### SKILL.md 模板
 
 ```markdown
 ---
