@@ -1,0 +1,8 @@
+{
+  "name": "github-doc-generator",
+  "description": "分析 GitHub 上的 Claude Code Skills/Plugins 项目并生成中文使用教程文档。支持代理、自动分析项目结构、提取 skills 信息、生成详细的中文 Markdown 文档。",
+  "author": {
+    "name": "feiyingmm",
+    "email": "feiyingmm@users.noreply.github.com"
+  }
+}
